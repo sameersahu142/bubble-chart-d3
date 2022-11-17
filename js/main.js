@@ -75,6 +75,29 @@ g.append("g")
     .attr("class", "y-axis")
     .call(yAxisCall)
 
+//Legend
+const continents = ["europe", "asia", "america", "africa"]
+
+const legend = g.append("g")
+    .attr("transform", `translate(${WIDTH - 10}, ${HEIGHT - 125})`)
+
+continents.forEach((continent, i) => {
+    const legendRow = legend.append("g")
+        .attr("transform", `translate(0, ${i * 20})`)
+
+    legendRow.append("rect")
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("fill", continentColor(continent))
+
+    legendRow.append("text")
+        .attr("x", -10)
+        .attr("y", 10)
+        .attr("text-anchor", "end")
+        .style("text-transform", "capitalize")
+        .text(continent)
+})
+
 d3.json("data/data.json").then((data) => {
     console.log(data);
 
